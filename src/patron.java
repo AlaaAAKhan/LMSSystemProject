@@ -31,39 +31,45 @@ public class patron {
     }
 
     public void setPatronID(String patronID) {
-        if (patronID.length() != 7) {
-            System.out.println("ID must be 7 characters");
-        }
-
-        else if (patronID.length() == 7) {
-            /*
-         for (char c : patronID.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                System.out.println("ID can only be integers");
+        boolean allInts = true;
+        do {
+            for (char c : patronID.toCharArray()) {
+                if (!Character.isDigit(c)) {
+                    System.out.println("ID can only be integers");
+                    allInts = false;
                 }
             }
-         */
-        }
-        else {
-            this.patronID = patronID;
-        }
 
+            if (allInts) {
+                this.patronID = patronID;
+            } else {
+                System.out.println("ID must be 7 characters");
+            }
+
+        } while (patronID.length() == 7);
     }
 
-    public void setPatronAddress(String patronAddress) {
+    public void setPatronAddress (String patronAddress){
         this.patronAddress = patronAddress;
     }
 
-    public void setPatronFines(double patronFines) {
-        this.patronFines = patronFines;
+    public void setPatronFines ( double patronFines){
+        try {
+            Double.parseDouble(String.valueOf(patronFines));
+            this.patronFines = patronFines;
+            ;
+        } catch (NumberFormatException e) {
+            System.out.println("Patron fines must be in decimal 0.0 format");
+        }
+
     }
 
     public patron() {
-        this.patronName = patronName;
-        this.patronID = patronID;
-        this.patronAddress = patronAddress;
-        this.patronFines = patronFines;
-    }
+            this.patronName = patronName;
+            this.patronID = patronID;
+            this.patronAddress = patronAddress;
+            this.patronFines = patronFines;
+        }
 
     /*public patron() {
         System.out.println("Enter Patron ID: ");
@@ -79,9 +85,9 @@ public class patron {
 
         System.out.println("Enter Patron Fine: ");
         this.patronFines = input.nextDouble();
-
     }
      */
-}
+    }
+
 
 

@@ -6,6 +6,7 @@ public class HomePage {
         System.out.println("Welcome to the Library Management System!");
         allPatrons patronObject = new allPatrons();
         int chosenOption;
+        int inputPref;
 
         do {
             System.out.println("Please select one of the following options:");
@@ -18,8 +19,27 @@ public class HomePage {
             switch (chosenOption) {
                 //Add a patron
                 case 1:
-                    patron p = new patron();
-                    patronObject.addPatronManually(p);
+                    System.out.println("\nSelect how you would like to add a Patron");
+                    System.out.println("1. Add Patron Manually");
+                    System.out.println("2. Add Patron from a Text File (will prompt upload)");
+                    inputPref = input.nextInt();
+
+                    switch(inputPref) {
+                        //Add user manually
+                        case 1:
+                            patron p1 = new patron();
+                            patronObject.addPatronManually(p1);
+                            break;
+
+                        //Add user(s) from a text file
+                        case 2:
+                            /*patron p2 = new patron();
+                            patronObject.addPatronFromTxtFile(p2);
+                            break;
+
+                             */
+
+                    }
                     break;
 
                 //Display all patrons
@@ -29,7 +49,9 @@ public class HomePage {
 
                 //Delete a patron
                 case 3:
-                    patronObject.removePatron(patronObject);
+                    System.out.println("\nEnter the ID of the Patron you would like to delete");
+                    String patronIDToDelete = input.next();
+                    patronObject.removePatron(patronIDToDelete);
                     break;
 
                 //Exit the program
