@@ -14,16 +14,18 @@ public class HomePage {
             System.out.println("1: Add Patron");
             System.out.println("2. Show All Patrons");
             System.out.println("3. Delete Patron");
-            System.out.println("\n0. Quit");
+            System.out.println("0. Quit");
             chosenOption = input.nextInt();
+            System.out.println("\n");
 
             switch (chosenOption) {
                 //Add a patron
                 case 1:
-                    System.out.println("\nSelect how you would like to add a Patron");
+                    System.out.println("Select how you would like to add a Patron");
                     System.out.println("1. Add Patron Manually");
                     System.out.println("2. Add Patron from a Text File (will prompt upload)");
                     inputPref = input.nextInt();
+                    System.out.println("\n");
 
                     switch(inputPref) {
                         //Add user manually

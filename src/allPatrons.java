@@ -10,9 +10,37 @@ public class allPatrons {
     public static int count = 0;
 
     public void addPatronManually(patron p){
-        System.out.println("\nEnter Patron ID: ");
+        /*System.out.println("\nEnter Patron ID: ");
         String patronID = input.nextLine();
-        p.setPatronID(patronID);
+        boolean allInts = true;
+        do {
+            for (char c : patronID.toCharArray()) {
+                if (!Character.isDigit(c)) {
+                    System.out.println("ID can only be integers");
+                    allInts = false;
+                }
+            }
+            if (allInts) {
+                p.setPatronID(patronID);
+                break;
+            }
+
+        } while (patronID.length() == 7);
+         */
+        Scanner scanner = new Scanner(System.in);
+        boolean validInput = false;
+        while (!validInput) {
+            System.out.println("Please enter Patron ID: ");
+            String patronID = input.nextLine();
+
+            if (patronID.matches("\\d+") && patronID.length() == 7) {
+                p.setPatronID(patronID);
+                validInput = true;
+            } else {
+                System.out.println("Invalid. Please make sure Patron ID only contains numbers and/or is 7-digits only");
+            }
+        }
+        scanner.close();
 
         System.out.println("\nEnter Patron Name: ");
         String patronName = input.nextLine();
@@ -30,7 +58,6 @@ public class allPatrons {
     }
 
     public void addPatronFromTxtFile(patron p) throws IOException {
-
         //Connect textfile to the program
         System.out.println("\nEnter the filepath to the text file: ");
         String filepath = input.nextLine(); //Get the filepath from the user
@@ -42,7 +69,9 @@ public class allPatrons {
 
         while (readFile.hasNextLine()) {
             token = new StringTokenizer(readFile.nextLine(),"-");
+                //read each line one at a time, specify delimiter
 
+            //Set the attributes based on the tokens specified from each line
             p.setPatronID(token.nextToken());
             p.setPatronName(token.nextToken());
             p.setPatronAddress(token.nextToken());
@@ -53,13 +82,14 @@ public class allPatrons {
 
     }
 
-     public void displayPatrons(){
+    public void displayPatrons(){
         for (int i = 0; i < patronsList.size(); i++){
             System.out.println("ID: " + patronsList.get(i).patronID + " | " +
                     "Name: " + patronsList.get(i).patronName + " | " +
                     "Address:" + patronsList.get(i).patronAddress + " | " +
-                    "\nFines: " + patronsList.get(i).patronFines);
+                    "Fines: " + patronsList.get(i).patronFines);
         }
+        System.out.println("\n");
     }
 
     public void removePatron(String patronID){

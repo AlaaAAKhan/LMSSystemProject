@@ -31,20 +31,7 @@ public class patron {
     }
 
     public void setPatronID(String patronID) {
-        boolean allInts = true;
-        if (patronID.length() == 7) {
-            for (char c : patronID.toCharArray()) {
-                if (!Character.isDigit(c)) {
-                    System.out.println("ID can only be integers");
-                    allInts = false;
-                }
-            }
-            if (allInts) {
-                this.patronID = patronID;
-            }
-        } else {
-            System.out.println("ID must be 7 characters");
-        }
+        this.patronID = patronID;
     }
 
     public void setPatronAddress (String patronAddress){
