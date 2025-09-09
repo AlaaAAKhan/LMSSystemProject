@@ -32,21 +32,19 @@ public class patron {
 
     public void setPatronID(String patronID) {
         boolean allInts = true;
-        do {
+        if (patronID.length() == 7) {
             for (char c : patronID.toCharArray()) {
                 if (!Character.isDigit(c)) {
                     System.out.println("ID can only be integers");
                     allInts = false;
                 }
             }
-
             if (allInts) {
                 this.patronID = patronID;
-            } else {
-                System.out.println("ID must be 7 characters");
             }
-
-        } while (patronID.length() == 7);
+        } else {
+            System.out.println("ID must be 7 characters");
+        }
     }
 
     public void setPatronAddress (String patronAddress){
@@ -57,7 +55,7 @@ public class patron {
         try {
             Double.parseDouble(String.valueOf(patronFines));
             this.patronFines = patronFines;
-            ;
+
         } catch (NumberFormatException e) {
             System.out.println("Patron fines must be in decimal 0.0 format");
         }
@@ -71,22 +69,6 @@ public class patron {
             this.patronFines = patronFines;
         }
 
-    /*public patron() {
-        System.out.println("Enter Patron ID: ");
-        this.patronID = input.nextInt(); //possibly make this a string, tell the user to make it 7 characters long
-
-        input.nextLine(); //Java seems to skip over these two sequences. You can add 'input.nextLine()' here to have Java recognize these separately.
-
-        System.out.println("Enter Patron Name: ");
-        this.patronName = input.nextLine();
-
-        System.out.println("Enter Patron Address: ");
-        this.patronAddress = input.nextLine();
-
-        System.out.println("Enter Patron Fine: ");
-        this.patronFines = input.nextDouble();
-    }
-     */
     }
 
 

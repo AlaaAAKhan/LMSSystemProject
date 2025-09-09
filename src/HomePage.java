@@ -1,7 +1,8 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class HomePage {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner input = new Scanner(System.in);
         System.out.println("Welcome to the Library Management System!");
         allPatrons patronObject = new allPatrons();
@@ -13,7 +14,7 @@ public class HomePage {
             System.out.println("1: Add Patron");
             System.out.println("2. Show All Patrons");
             System.out.println("3. Delete Patron");
-            System.out.println("0. Quit");
+            System.out.println("\n0. Quit");
             chosenOption = input.nextInt();
 
             switch (chosenOption) {
@@ -33,11 +34,9 @@ public class HomePage {
 
                         //Add user(s) from a text file
                         case 2:
-                            /*patron p2 = new patron();
+                            patron p2 = new patron();
                             patronObject.addPatronFromTxtFile(p2);
                             break;
-
-                             */
 
                     }
                     break;
