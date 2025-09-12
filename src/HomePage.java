@@ -30,14 +30,15 @@ public class HomePage {
                     switch(inputPref) {
                         //Add user manually
                         case 1:
-                            patron p1 = new patron();
-                            patronObject.addPatronManually(p1);
+                            //patron p1 = new patron();
+                            patron p = new patron();
+                            patronObject.addPatronManually(p);
                             break;
 
                         //Add user(s) from a text file
                         case 2:
-                            patron p2 = new patron();
-                            patronObject.addPatronFromTxtFile(p2);
+                            //patron p2 = new patron();
+                            patronObject.addPatronFromTxtFile();
                             break;
 
                     }
@@ -50,18 +51,13 @@ public class HomePage {
 
                 //Delete a patron
                 case 3:
-                    System.out.println("\nEnter the ID of the Patron you would like to delete");
-                    String patronIDToDelete = input.next();
-                    patronObject.removePatron(patronIDToDelete);
+                    patronObject.removePatron();
                     break;
 
                 //Exit the program
                 case 0:
                     System.out.println("Goodbye!");
                     break;
-
-                default:
-                    System.out.println("Please enter a valid integer between 0 and 3");
             }
         }
         while (chosenOption != 0);

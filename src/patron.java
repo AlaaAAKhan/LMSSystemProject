@@ -1,20 +1,23 @@
-import java.util.Scanner;
-import java.util.Iterator;
-
 public class patron {
-    String patronName;
     String patronID;
+    String patronName;
     String patronAddress;
     double patronFines;
-    Scanner input = new Scanner(System.in);
 
-    //  GETTERS
-    public String getPatronName() {
-        return patronName;
+    public patron() {
+        this.patronName = patronName;
+        this.patronID = patronID;
+        this.patronAddress = patronAddress;
+        this.patronFines = patronFines;
     }
 
+    //  GETTERS
     public String getPatronID() {
         return patronID;
+    }
+
+    public String getPatronName() {
+        return patronName;
     }
 
     public String getPatronAddress() {
@@ -38,7 +41,7 @@ public class patron {
         this.patronAddress = patronAddress;
     }
 
-    public void setPatronFines ( double patronFines){
+    public void setPatronFines (double patronFines){
         try {
             Double.parseDouble(String.valueOf(patronFines));
             this.patronFines = patronFines;
@@ -48,13 +51,6 @@ public class patron {
         }
 
     }
-
-    public patron() {
-            this.patronName = patronName;
-            this.patronID = patronID;
-            this.patronAddress = patronAddress;
-            this.patronFines = patronFines;
-        }
 
     }
 

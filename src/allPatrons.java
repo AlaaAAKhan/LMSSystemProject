@@ -7,100 +7,134 @@ import java.util.*;
 public class allPatrons {
     Scanner input = new Scanner(System.in);
     ArrayList<patron> patronsList = new ArrayList<patron>();    //init arrayList to hold patron info
-    public static int count = 0;
 
     public void addPatronManually(patron p){
-        /*System.out.println("\nEnter Patron ID: ");
-        String patronID = input.nextLine();
-        boolean allInts = true;
-        do {
-            for (char c : patronID.toCharArray()) {
-                if (!Character.isDigit(c)) {
-                    System.out.println("ID can only be integers");
-                    allInts = false;
-                }
-            }
-            if (allInts) {
-                p.setPatronID(patronID);
-                break;
-            }
-
-        } while (patronID.length() == 7);
-         */
-        Scanner scanner = new Scanner(System.in);
-        boolean validInput = false;
-        while (!validInput) {
-            System.out.println("Please enter Patron ID: ");
-            String patronID = input.nextLine();
-
-            if (patronID.matches("\\d+") && patronID.length() == 7) {
-                p.setPatronID(patronID);
-                validInput = true;
-            } else {
-                System.out.println("Invalid. Please make sure Patron ID only contains numbers and/or is 7-digits only");
-            }
-        }
-        scanner.close();
+        Scanner in = new Scanner(System.in);
+        IDChecker(p);
 
         System.out.println("\nEnter Patron Name: ");
-        String patronName = input.nextLine();
-        p.setPatronName(patronName);
+        p.setPatronName(in.nextLine());
 
         System.out.println("\nEnter Patron Address: ");
-        String patronAddress = input.nextLine();
-        p.setPatronAddress(patronAddress);
+        p.setPatronAddress(in.nextLine());
 
         System.out.println("\nEnter Patron Fines: ");
-        double patronFines = input.nextDouble();
-        p.setPatronFines(patronFines);
+        p.setPatronFines(in.nextDouble());
 
         patronsList.add(p);
     }
 
-    public void addPatronFromTxtFile(patron p) throws IOException {
+    public void IDChecker(patron p){
+        do {
+            System.out.println("Enter Patron ID: ");
+            String patronID = input.nextLine();
+            if (patronID.length() == 7) {
+                if (checkIfAllInts(patronID)) {
+                    if(!checkIfExists(patronID)){
+                        p.setPatronID(patronID);
+                        break;
+                    } else {
+                        System.out.println("Patron ID already exists");
+                    }
+                } else {
+                    System.out.println("\nPatron ID must only be integers");
+                }
+            } else {
+                System.out.println("\nPatron ID must be 7 digits");
+            }
+        } while (true);
+    }
+
+    public boolean checkIfAllInts(String patronID) {
+        for (char c : patronID.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkIfExists(String patronID) {
+        for (int i = 0; i < patronsList.size(); i++) {
+            if (patronsList.get(i).getPatronID().equals(patronID)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addPatronFromTxtFile(){
         //Connect textfile to the program
-        System.out.println("\nEnter the filepath to the text file: ");
-        String filepath = input.nextLine(); //Get the filepath from the user
-        File file = new File(filepath);     //Use the obtained filepath to get the file
+        try {
+            System.out.println("\nEnter the filepath to the text file: ");
+            ///Users/alaa/Downloads/Patron Info.txt
 
-        Scanner readFile = new Scanner(file);   //create a scanner to read the file
-        StringTokenizer token = null;
-            //Detects the range from which a string should be accepted before moving on
+            String filepath = input.nextLine(); //Get the filepath from the user
+            File file = new File(filepath);     //Use the obtained filepath to get the file
 
-        while (readFile.hasNextLine()) {
-            token = new StringTokenizer(readFile.nextLine(),"-");
+            Scanner readFile = new Scanner(file);   //create a scanner to read the file
+            StringTokenizer token = null;       //Detects the range from which a string should be accepted before moving on
+
+            while (readFile.hasNextLine()) {
+                patron p1 = new patron();
+                token = new StringTokenizer(readFile.nextLine(), "-");
                 //read each line one at a time, specify delimiter
 
-            //Set the attributes based on the tokens specified from each line
-            p.setPatronID(token.nextToken());
-            p.setPatronName(token.nextToken());
-            p.setPatronAddress(token.nextToken());
-            p.setPatronFines(Double.parseDouble(token.nextToken()));
+                //Set the attributes based on the tokens specified from each line
+                p1.setPatronID(token.nextToken());
+                p1.setPatronName(token.nextToken());
+                p1.setPatronAddress(token.nextToken());
+                p1.setPatronFines(Double.parseDouble(token.nextToken()));
 
-            patronsList.add(p);
+                patronsList.add(p1);
+            }
+        } catch(FileNotFoundException e) {
+            System.out.println("File Not Found");
         }
 
     }
 
     public void displayPatrons(){
-        for (int i = 0; i < patronsList.size(); i++){
+         for (int i = 0; i < patronsList.size(); i++){
             System.out.println("ID: " + patronsList.get(i).patronID + " | " +
                     "Name: " + patronsList.get(i).patronName + " | " +
-                    "Address:" + patronsList.get(i).patronAddress + " | " +
+                    "Address: " + patronsList.get(i).patronAddress + " | " +
                     "Fines: " + patronsList.get(i).patronFines);
         }
+         System.out.println(patronsList);
         System.out.println("\n");
     }
 
-    public void removePatron(String patronID){
-        Iterator<patron> iterator = patronsList.iterator();
+    public void removePatron() {
+        Scanner in = new Scanner(System.in);
+        System.out.println("\nEnter the ID of the Patron you would like to delete");
+        String inputtedPatronID = in.nextLine();
+        /*Iterator<patron> iterator = patronsList.iterator();
         if (iterator.hasNext()){
             if (iterator.next().getPatronID().equals(patronID)){
                 iterator.remove();
                 System.out.println("\nThe patron with ID: " + patronID + " has been removed");
+            } else {
+                System.out.println("\nPatron ID " + patronID + " does not exist in the system");
+                }
+        } */
+
+        //patronsList.removeIf(p -> p.getPatronID().equals(inputtedPatronID));
+        //System.out.println("\nPatron ID: " + inputtedPatronID + " removed");
+
+        /*for (patron p : patronsList) {
+            if (p.patronID.equals(inputtedPatronID)) {
+                patronsList.remove(p);
+                System.out.println("\nPatron ID: " + inputtedPatronID + " removed");
             }
-        } else {
-            System.out.println("Patron ID " + patronID + " does not exist in the system");
+        } */
+
+        ArrayList<patron> copyOfPatronsList = new ArrayList<>(patronsList);
+        for (patron p : copyOfPatronsList) {
+            if (p.getPatronID().equals(inputtedPatronID)) {
+                patronsList.remove(p);
+                System.out.println("\nPatron ID: " + inputtedPatronID + " removed");
+            }
         }
     }
 
