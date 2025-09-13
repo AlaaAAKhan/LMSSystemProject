@@ -1,3 +1,14 @@
+/*
+* Alaa Khan
+* CEN 3024C - 13950 - Software Development 1
+* September 8, 2025
+* HomePage.java
+*
+* This class contains the code to display the menu of options. Users pick a number to perform the
+* tasks of adding, removing, or displaying patrons, as well as exiting the program. The number they
+* chose is for the switch statement to call functions from the utility class.
+* */
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -28,16 +39,14 @@ public class HomePage {
                     System.out.println("\n");
 
                     switch(inputPref) {
-                        //Add user manually
+                        //Add patron manually
                         case 1:
-                            //patron p1 = new patron();
                             patron p = new patron();
                             patronObject.addPatronManually(p);
                             break;
 
-                        //Add user(s) from a text file
+                        //Add patron(s) from a text file
                         case 2:
-                            //patron p2 = new patron();
                             patronObject.addPatronFromTxtFile();
                             break;
 

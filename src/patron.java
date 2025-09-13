@@ -1,3 +1,13 @@
+/*
+ * Alaa Khan
+ * CEN 3024C - 13950 - Software Development 1
+ * September 8, 2025
+ * patron.java
+ *
+ * This is a constructor class. It creates a default constructor, so it does not take in any parameters. This is so
+ * the patron object can be created, but its fields will be populated later based on the user's input.
+ * */
+
 public class patron {
     String patronID;
     String patronName;
