@@ -20,12 +20,13 @@ public class allPatrons {
 
     /* When adding a patron manually, the user will be asked to enter the ID, name, address, and amount of fines due of
     the patron. For each field, the user is prompted and whatever they enter is set to that field. This is the case for
-    all the fields except ID because it needs to meet certain requirements. After setting all the fields of that patron,
-    it adds that patron to the list.
+    all the fields except ID and finesDue because they need to meet certain requirements. After setting all the fields
+    of that patron, it adds that patron to the list.
     */
-    public void addPatronManually(patron p){
+    public void addPatronManually(patron p) {
         //creating a scanner object for this specifically prevented some errors I was running into
         Scanner in = new Scanner(System.in);
+
         IDChecker(p);
 
         System.out.println("\nEnter Patron Name: ");
@@ -34,11 +35,28 @@ public class allPatrons {
         System.out.println("\nEnter Patron Address: ");
         p.setPatronAddress(in.nextLine());
 
-        System.out.println("\nEnter Patron Fines: ");
-        p.setPatronFines(in.nextDouble());
+        FinesChecker(p);
 
         patronsList.add(p);
+        displayPatrons();
+        System.out.println("\n");
     }
+
+    //This method checks to make sure the range requirement is met before it sets it to the amount of fines due attribute.
+    public void FinesChecker(patron p) {
+        do {
+            System.out.println("\nEnter Patron Fines: ");
+            double finesDue = input.nextDouble();
+
+            if (finesDue >= 0.0 && finesDue <= 250.0) {
+                p.setPatronFines(finesDue);
+                break;
+            } else {
+                System.out.println("\nPatron Fine is out of range. Must be between 0 and 250");
+            }
+        }  while(true);
+    }
+
 
     /*
      This method takes in the inputted ID and checks it to make sure it can be set as the patron's ID. First, it checks
@@ -130,12 +148,10 @@ public class allPatrons {
         } catch(FileNotFoundException e) {
             System.out.println("File Not Found");
         }
-
+        displayPatrons();
     }
 
-    /*
-    Loop to display patrons from patronsList
-     */
+    //Loop to display patrons from patronsList
     public void displayPatrons(){
          for (int i = 0; i < patronsList.size(); i++){
             System.out.println("ID: " + patronsList.get(i).patronID + " | " +
@@ -165,6 +181,8 @@ public class allPatrons {
             }
         }
         patronsList = copyOfPatronsList;
+        displayPatrons();
+        System.out.println("\n");
     }
 
 }

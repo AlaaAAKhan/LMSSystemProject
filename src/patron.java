@@ -52,14 +52,7 @@ public class patron {
     }
 
     public void setPatronFines (double patronFines){
-        try {
-            Double.parseDouble(String.valueOf(patronFines));
             this.patronFines = patronFines;
-
-        } catch (NumberFormatException e) {
-            System.out.println("Patron fines must be in decimal 0.0 format");
-        }
-
     }
 
     }
