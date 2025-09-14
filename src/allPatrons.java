@@ -9,8 +9,6 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.*;
 
 public class allPatrons {
@@ -40,21 +38,6 @@ public class allPatrons {
         patronsList.add(p);
         displayPatrons();
         System.out.println("\n");
-    }
-
-    //This method checks to make sure the range requirement is met before it sets it to the amount of fines due attribute.
-    public void FinesChecker(patron p) {
-        do {
-            System.out.println("\nEnter Patron Fines: ");
-            double finesDue = input.nextDouble();
-
-            if (finesDue >= 0.0 && finesDue <= 250.0) {
-                p.setPatronFines(finesDue);
-                break;
-            } else {
-                System.out.println("\nPatron Fine is out of range. Must be between 0 and 250");
-            }
-        }  while(true);
     }
 
 
@@ -112,6 +95,21 @@ public class allPatrons {
             }
         }
         return false;
+    }
+
+    //This method checks to make sure the range requirement is met before it sets it to the amount of fines due attribute.
+    public void FinesChecker(patron p) {
+        do {
+            System.out.println("\nEnter Patron Fines: ");
+            double finesDue = input.nextDouble();
+
+            if (finesDue >= 0.0 && finesDue <= 250.0) {
+                p.setPatronFines(finesDue);
+                break;
+            } else {
+                System.out.println("\nPatron Fine is out of range. Must be between 0 and 250");
+            }
+        }  while(true);
     }
 
     /*
